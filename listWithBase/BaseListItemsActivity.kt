@@ -64,6 +64,7 @@ abstract class BaseListItemsActivity<DATA, ADAPTER : BasicAdapter<DATA>, MODEL :
         model.itemsLiveData.observe(this, Observer { showItemsPerPage(it) })
         model.showMessageLiveData.observe(this, Observer { showPlaceholderText(it) })
         model.getItems(1)
+        showLoading(true)
     }
 
     abstract fun instantiateViewModel(): MODEL
@@ -71,6 +72,7 @@ abstract class BaseListItemsActivity<DATA, ADAPTER : BasicAdapter<DATA>, MODEL :
     private fun showItemsPerPage(items: List<DATA>) {
         adapter.items.addAll(items)
         adapter.notifyDataSetChanged()
+        showLoading(false)
     }
 
     override fun showPlaceholderText(text: String?) {

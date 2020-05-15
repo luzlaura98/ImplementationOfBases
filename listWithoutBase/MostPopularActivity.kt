@@ -58,11 +58,13 @@ class MostPopularActivity : BaseActivity() {
         model.videosLiveData.observe(this, Observer { showVideosPerPage(it) })
         model.showMessageLiveData.observe(this, Observer { showPlaceholderText(it) })
         model.getMostPopularVideos(1)
+        showLoading(true)
     }
 
     private fun showVideosPerPage(items: List<VideoBJJ>) {
         adapter.items.addAll(items)
         adapter.notifyDataSetChanged()
+        showLoading(false)
     }
 
     override fun showPlaceholderText(text: String?) {
